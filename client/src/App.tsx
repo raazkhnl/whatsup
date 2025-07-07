@@ -6,7 +6,6 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Chat from "./pages/Chat";
 import ProtectedRoute from "./ProtectedRoute";
-import Header from "./components/Header";
 import GuestLayout from "./layouts/GuestLayout";
 import UserLayout from "./layouts/UserLayout";
 
@@ -40,7 +39,6 @@ function App() {
 						element={
 							<ProtectedRoute>
 								<UserLayout>
-									<Header />
 									<Chat socket={socket} />
 								</UserLayout>
 							</ProtectedRoute>
@@ -51,7 +49,6 @@ function App() {
 						element={
 							<ProtectedRoute>
 								<UserLayout>
-									<Header />
 									<Chat socket={socket} />
 								</UserLayout>
 							</ProtectedRoute>
@@ -62,7 +59,6 @@ function App() {
 						element={
 							<ProtectedRoute>
 								<UserLayout>
-									<Header />
 									<Chat socket={socket} />
 								</UserLayout>
 							</ProtectedRoute>

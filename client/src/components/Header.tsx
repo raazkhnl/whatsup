@@ -9,7 +9,7 @@ const Header: React.FC<{ username?: string }> = ({ username }) => {
 	};
 	return (
 		<header
-			className="header"
+			className="header h-[10vh] border-gray-800 border-1"
 			style={{
 				display: "flex",
 				alignItems: "center",
