@@ -24,30 +24,73 @@ const Login: React.FC = () => {
 	};
 
 	return (
-		<div className="flex items-center justify-center h-screen bg-gray-100">
-			<div className="p-8 bg-white rounded-lg shadow-lg w-full max-w-md">
-				<h2 className="text-2xl font-bold text-blue-600 mb-6">Login</h2>
-				{error && <p className="text-red-500 mb-4">{error}</p>}
-				<input
-					type="email"
-					value={email}
-					onChange={(e) => setEmail(e.target.value)}
-					placeholder="Email"
-					className="w-full p-3 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-				/>
-				<input
-					type="password"
-					value={password}
-					onChange={(e) => setPassword(e.target.value)}
-					placeholder="Password"
-					className="w-full p-3 mb-6 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-				/>
-				<button
-					onClick={handleLogin}
-					className="w-full p-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition"
+		<div>
+			<h2
+				style={{
+					fontSize: "2rem",
+					fontWeight: 700,
+					color: "#00e1ff",
+					marginBottom: 24,
+					letterSpacing: "0.04em",
+					textAlign: "center",
+				}}
+			>
+				Sign In
+			</h2>
+			{error && (
+				<p
+					style={{
+						color: "#ff4d4f",
+						marginBottom: 16,
+						textAlign: "center",
+					}}
 				>
-					Login
-				</button>
+					{error}
+				</p>
+			)}
+			<input
+				type="email"
+				value={email}
+				onChange={(e) => setEmail(e.target.value)}
+				placeholder="Email"
+				style={{ width: "100%", marginBottom: 18 }}
+			/>
+			<input
+				type="password"
+				value={password}
+				onChange={(e) => setPassword(e.target.value)}
+				placeholder="Password"
+				style={{ width: "100%", marginBottom: 24 }}
+			/>
+			<button
+				onClick={handleLogin}
+				style={{
+					width: "100%",
+					fontWeight: 700,
+					fontSize: "1.1rem",
+				}}
+			>
+				Login
+			</button>
+			<div
+				style={{
+					marginTop: 18,
+					textAlign: "center",
+					color: "#b0b0b0",
+					fontSize: 14,
+				}}
+			>
+				Don&apos;t have an account?{" "}
+				<span
+					style={{
+						color: "#00e1ff",
+						cursor: "pointer",
+						textDecoration: "underline",
+					}}
+					onClick={() => navigate("/register")}
+				>
+					Register
+				</span>
 			</div>
 		</div>
 	);
