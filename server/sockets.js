@@ -37,16 +37,19 @@ function setupSocket(io) {
                     group: groupId || null
                 };
 
-                // Save message to database
-                const savedMessage = await Message.create(message);
+                // Save message to database and populate sender field
+                let savedMessage = await Message.create(message);
+                savedMessage = await Message.findById(savedMessage._id).populate('sender', '_id username');
 
                 if (groupId) {
                     // Emit to all users in the group
                     io.to(groupId).emit('newMessage', savedMessage);
                 } else {
-                    // Emit to sender and receiver
+                    // Emit to sender and receiver (avoid duplicate if same)
                     io.to(userId).emit('newMessage', savedMessage);
-                    io.to(to).emit('newMessage', savedMessage);
+                    if (to && to !== userId) {
+                        io.to(to).emit('newMessage', savedMessage);
+                    }
                 }
             } catch (err) {
                 console.error('Error sending message:', err);

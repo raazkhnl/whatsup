@@ -34,6 +34,9 @@ const Chat: React.FC<ChatProps> = ({ socket }) => {
 	if (!id) {
 		id = userId || "";
 	}
+
+	// Ref for chat container
+	const chatContainerRef = React.useRef<HTMLDivElement>(null);
 	useEffect(() => {
 		const fetchUsers = async () => {
 			try {
@@ -66,7 +69,7 @@ const Chat: React.FC<ChatProps> = ({ socket }) => {
 		};
 		fetchMessages();
 
-		socket.on("newMessage", (message: Message & { _id: string }) => {
+		const handleNewMessage = (message: Message & { _id: string }) => {
 			if (
 				(chatType === "user" &&
 					(message.sender._id === id || message.to === id)) ||
@@ -80,17 +83,26 @@ const Chat: React.FC<ChatProps> = ({ socket }) => {
 					return [...prev, message];
 				});
 			}
-		});
+		};
 
+		socket.on("newMessage", handleNewMessage);
 		socket.on("onlineUsers", (users: string[]) => {
 			setOnlineUsers(users);
 		});
 
 		return () => {
-			socket.off("newMessage");
+			socket.off("newMessage", handleNewMessage);
 			socket.off("onlineUsers");
 		};
 	}, [socket, id, chatType]);
+
+	// Scroll to bottom when messages change
+	useEffect(() => {
+		if (chatContainerRef.current) {
+			chatContainerRef.current.scrollTop =
+				chatContainerRef.current.scrollHeight;
+		}
+	}, [messages]);
 
 	useEffect(() => {
 		setActiveUser(id || null);
@@ -165,11 +177,14 @@ const Chat: React.FC<ChatProps> = ({ socket }) => {
 				</div> */}
 			</aside>
 			<main className="flex-1 flex flex-col w-full h-full">
-				<div className="flex-1 p-4 sm:p-6 flex flex-col gap-3 overflow-y-auto">
+				<div
+					ref={chatContainerRef}
+					className="flex-1 p-4 sm:p-6 flex flex-col gap-3 overflow-y-auto"
+				>
 					{messages.map((msg, idx) => {
 						const notMe = msg.sender._id !== userId && msg.sender._id;
-						console.log(userId, notMe);
-						console.log("Message:", msg);
+						// console.log(userId, notMe);
+						// console.log("Message:", msg);
 
 						return (
 							<div
