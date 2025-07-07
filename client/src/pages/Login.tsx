@@ -25,8 +25,9 @@ const Login: React.FC = () => {
 
 	return (
 		<div className="w-full h-full flex flex-col items-center justify-center space-y-6">
-			<h2 className="text-3xl font-bold text-cyan-500 text-center tracking-tight">
-				Sign In
+			<h2 className="text-3xl font-boldtext-center tracking-tight">
+				<span style={{ color: "#00e1ff" }}>Log</span>{" "}
+				<span style={{ color: "#ffb300" }}>In</span>
 			</h2>
 			{error && <p className="text-red-500 text-center mt-4">{error}</p>}
 			<input
@@ -58,6 +59,10 @@ const Login: React.FC = () => {
 					Register
 				</span>
 			</div>
+			<p className="text-center text-sm  font-medium">
+				<span style={{ color: "#00e1ff" }}>Copyright &copy; 2025</span>{" "}
+				<span style={{ color: "#ffb300" }}>RaaZ Khanal</span>{" "}
+			</p>
 		</div>
 	);
 };
