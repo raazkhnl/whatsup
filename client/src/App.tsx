@@ -16,59 +16,61 @@ const socket: Socket = io(API_URL, {
 
 function App() {
 	return (
-		<Router>
-			<Routes>
-				<Route
-					path="/login"
-					element={
-						<GuestLayout>
-							<Login />
-						</GuestLayout>
-					}
-				/>
-				<Route
-					path="/register"
-					element={
-						<GuestLayout>
-							<Register />
-						</GuestLayout>
-					}
-				/>
-				<Route
-					path="/chat/:id"
-					element={
-						<ProtectedRoute>
-							<UserLayout>
-								<Header />
-								<Chat socket={socket} />
-							</UserLayout>
-						</ProtectedRoute>
-					}
-				/>
-				<Route
-					path="/group/:id"
-					element={
-						<ProtectedRoute>
-							<UserLayout>
-								<Header />
-								<Chat socket={socket} />
-							</UserLayout>
-						</ProtectedRoute>
-					}
-				/>
-				<Route
-					path="/"
-					element={
-						<ProtectedRoute>
-							<UserLayout>
-								<Header />
-								<Chat socket={socket} />
-							</UserLayout>
-						</ProtectedRoute>
-					}
-				/>
-			</Routes>
-		</Router>
+		<div className="w-screen h-screen">
+			<Router>
+				<Routes>
+					<Route
+						path="/login"
+						element={
+							<GuestLayout>
+								<Login />
+							</GuestLayout>
+						}
+					/>
+					<Route
+						path="/register"
+						element={
+							<GuestLayout>
+								<Register />
+							</GuestLayout>
+						}
+					/>
+					<Route
+						path="/chat/:id"
+						element={
+							<ProtectedRoute>
+								<UserLayout>
+									<Header />
+									<Chat socket={socket} />
+								</UserLayout>
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						path="/group/:id"
+						element={
+							<ProtectedRoute>
+								<UserLayout>
+									<Header />
+									<Chat socket={socket} />
+								</UserLayout>
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						path="/"
+						element={
+							<ProtectedRoute>
+								<UserLayout>
+									<Header />
+									<Chat socket={socket} />
+								</UserLayout>
+							</ProtectedRoute>
+						}
+					/>
+				</Routes>
+			</Router>
+		</div>
 	);
 }
 

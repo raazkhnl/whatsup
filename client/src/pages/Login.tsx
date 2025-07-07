@@ -16,7 +16,7 @@ const Login: React.FC = () => {
 				password,
 			});
 			localStorage.setItem("token", response.data.token);
-			localStorage.setItem("userId", response.data.userId); // Assuming server returns userId
+			localStorage.setItem("userId", response.data.user.id);
 			navigate("/");
 		} catch (err) {
 			setError("Invalid credentials");
@@ -24,69 +24,35 @@ const Login: React.FC = () => {
 	};
 
 	return (
-		<div>
-			<h2
-				style={{
-					fontSize: "2rem",
-					fontWeight: 700,
-					color: "#00e1ff",
-					marginBottom: 24,
-					letterSpacing: "0.04em",
-					textAlign: "center",
-				}}
-			>
+		<div className="w-full h-full flex flex-col items-center justify-center space-y-6">
+			<h2 className="text-3xl font-bold text-cyan-500 text-center tracking-tight">
 				Sign In
 			</h2>
-			{error && (
-				<p
-					style={{
-						color: "#ff4d4f",
-						marginBottom: 16,
-						textAlign: "center",
-					}}
-				>
-					{error}
-				</p>
-			)}
+			{error && <p className="text-red-500 text-center mt-4">{error}</p>}
 			<input
 				type="email"
 				value={email}
 				onChange={(e) => setEmail(e.target.value)}
 				placeholder="Email"
-				style={{ width: "100%", marginBottom: 18 }}
+				className="w-full p-3 mt-6 rounded-lg border border-gray-700 bg-gray-700 text-gray-200 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 outline-none transition"
 			/>
 			<input
 				type="password"
 				value={password}
 				onChange={(e) => setPassword(e.target.value)}
 				placeholder="Password"
-				style={{ width: "100%", marginBottom: 24 }}
+				className="w-full p-3 mt-4 rounded-lg border border-gray-700 bg-gray-700 text-gray-200 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 outline-none transition"
 			/>
 			<button
 				onClick={handleLogin}
-				style={{
-					width: "100%",
-					fontWeight: 700,
-					fontSize: "1.1rem",
-				}}
+				className="w-full p-3 mt-6 bg-cyan-500 text-gray-900 font-bold rounded-lg shadow hover:bg-cyan-600 transition"
 			>
 				Login
 			</button>
-			<div
-				style={{
-					marginTop: 18,
-					textAlign: "center",
-					color: "#b0b0b0",
-					fontSize: 14,
-				}}
-			>
-				Don&apos;t have an account?{" "}
+			<div className="mt-4 text-center text-gray-400 text-sm">
+				Don't have an account?{" "}
 				<span
-					style={{
-						color: "#00e1ff",
-						cursor: "pointer",
-						textDecoration: "underline",
-					}}
+					className="text-cyan-500 cursor-pointer underline"
 					onClick={() => navigate("/register")}
 				>
 					Register
