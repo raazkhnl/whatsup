@@ -5,4 +5,10 @@ export default defineConfig({
   plugins: [
     tailwindcss(),
   ],
+  build: {
+    outDir: 'dist', // Output directory for production build
+  },
+  server: {
+    port: 5173, // Development server port
+  },
 })
